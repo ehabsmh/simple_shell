@@ -45,10 +45,13 @@ char **parse_cmd(char *cmd)
 		return (NULL);
 
 	/* Tokenize and duplicate each string to the new memory */
+	token = strtok(cmd, delimiters);
 	for (i = 0; i < token_count; i++)
 	{
 		args[i] = _strdup(token);
 		token = strtok(NULL, delimiters);
 	}
+	args[i] = NULL;
+
 	return (args);
 }
