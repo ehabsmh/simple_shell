@@ -4,10 +4,9 @@
  * parse_cmd - parsing the command into tokens
  * @cmd: the command line
  * 
- * Return: The command-line as array of strings
- * OTHERWISE return NULL
-*/
-
+ * Return: The command-line as an array of strings
+ *         Otherwise, return NULL
+ **/
 char **parse_cmd(char *cmd)
 {
 	char **args;
@@ -34,12 +33,12 @@ char **parse_cmd(char *cmd)
 		token = strtok(NULL, delimiters);
 	}
 
-	/* Increment one token for the last element(NULL) */
+	/* Increment one token for the last element (NULL) */
 	token_count++;
 
 	free(cmd_cpy);
 
-	/* Create array of pointers of ntokens */
+	/* Create an array of pointers of ntokens */
 	args = malloc(sizeof(char *) * token_count);
 	if (!args)
 		return (NULL);
@@ -53,5 +52,5 @@ char **parse_cmd(char *cmd)
 	}
 	args[i] = NULL;
 
-	return (args);
+	return (args);
 }
