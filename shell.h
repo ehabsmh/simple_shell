@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 #include <string.h>
 
+extern char **environ;
+
 /* Structures */
 /**
  * struct Path - The env PATH
