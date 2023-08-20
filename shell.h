@@ -12,11 +12,11 @@
 /* Structures */
 typedef struct Path path;
 
- struct Path
-{
-  char *dir;
-  path *next_dir;
-};
+  struct Path
+ {
+   char *dir;
+   path *next_dir;
+ };
 
 
 
@@ -35,5 +35,8 @@ int search_path(char **arg);
 /HELPERS PROTOTYPES/
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+char *_strcat(char *dest, char *src);
+
 
 #endif
