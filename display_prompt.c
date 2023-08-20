@@ -13,4 +13,7 @@ void display_prompt(void)
 
 	if (!p_prompt)
 		printf("$ ");
+	else
+		printf("%s$ ", p_prompt);
+
 }
