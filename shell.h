@@ -10,18 +10,14 @@
 #include <string.h>
 
 /* Structures */
-typedef struct Path path;
-
-  struct Path
- {
-   char *dir;
-   path *next_dir;
- };
-
-
+typedef struct Path
+{
+	char *dir;
+	struct Path *next_dir;
+} path;
 
 /* MAIN PROTOTYPES */
-void default_process();
+void default_process(void);
 void display_prompt(void);
 char *get_cmd(void);
 char **parse_cmd(char *cmd);
@@ -31,12 +27,10 @@ path *create_list(void);
 char *_getenv(const char *name);
 int search_path(char **arg);
 
-
-/HELPERS PROTOTYPES/
+/* HELPERS PROTOTYPES */
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
-char *_strcat(char *dest, char *src);
-
+char *_strcat(char *dest, char *src);
 
 #endif
