@@ -6,7 +6,7 @@
  * 
  * Return: The command-line as an array of strings
  *         Otherwise, return NULL
- **/
+**/
 char **parse_cmd(char *cmd)
 {
 	char **args;
