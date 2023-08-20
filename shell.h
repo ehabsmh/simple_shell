@@ -10,6 +10,11 @@
 #include <string.h>
 
 /* Structures */
+/**
+ * struct Path - The env PATH
+ * @dir: The directory
+ * @next_dir: The next directory
+*/
 typedef struct Path
 {
 	char *dir;
