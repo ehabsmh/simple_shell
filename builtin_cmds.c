@@ -16,13 +16,14 @@ void __exit(char **args, char **argv, int count)
 	(void)argv;
 	(void)count;
 
-	if (args[1] && _atoi(args[1]) < 0)
-	{
-		return;
-	}
 
 	if (args[1])
 	{
+		if (_atoi(args[1]) < 0)
+		{
+			status = 2;
+			exit(status);
+		}
 		status = _atoi(args[1]);
 		exit(status);
 	}
