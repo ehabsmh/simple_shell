@@ -27,7 +27,6 @@ void __exit(char **args, char **argv, int count)
 		exit(status);
 	}
 
-	_puts("Exiting...");
 	exit(0);
 }
 
