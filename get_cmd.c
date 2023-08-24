@@ -9,21 +9,17 @@ char *get_cmd(void)
 {
 	char *line = NULL;
 	size_t line_size = 0;
-	int chars_read;
+	ssize_t chars_read;
 
 	chars_read = getline(&line, &line_size, stdin);
 
 	if (chars_read == -1)
 	{
 		/* check for end of file ctrl+D */
-		if (feof(stdin))
-		{
-			free(line);
-			exit(EXIT_SUCCESS);
-		}
-
-		perror("getline");
-		exit(EXIT_FAILURE);
+		_putchar('\n');
+		free(line);
+		line = NULL;
+		exit(EXIT_SUCCESS);
 	}
 
 	/* check the end of line and replace it with '\0' */

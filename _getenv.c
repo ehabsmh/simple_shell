@@ -35,6 +35,9 @@ char *_getenv(const char *name)
 	if (is_same)
 	{
 		env_value = malloc((env_len + 1) * sizeof(char));
+		if (!env_value)
+			return (NULL);
+
 		_strcpy(env_value, env[i] + j + 1);
 		env_value[env_len] = '\0';
 	}

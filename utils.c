@@ -62,14 +62,12 @@ char *_strdup(char *str)
 
 	str_len = _strlen(str);
 
-	str_cpy = malloc((sizeof(char) * str_len) + 1);
+	str_cpy = malloc(sizeof(char) * (str_len + 1));
 
 	if (str_cpy == NULL)
 		return (NULL);
 
 	_strcpy(str_cpy, str);
-
-	str_cpy[str_len] = '\0';
 
 	return (str_cpy);
 }
@@ -90,4 +88,30 @@ char *_strcat(char *dest, char *src)
 	for (index = 0; src[index]; index++)
 		dest[dest_len++] = src[index];
 	return (dest);
+}
+
+/**
+ * _atoi - convert a string to an integer.
+ * @s: the string to be comverted.
+ *
+ *Return: The integer value of the comverted string.
+ */
+int _atoi(char *s)
+{
+	int sign = 1;
+	unsigned int num = 0;
+
+	do {
+
+		if (*s == '-')
+			sign *= -1;
+
+		else if (*s >= '0' && *s <= '9')
+			num = (num * 10) + (*s - '0');
+
+		else if (num > 0)
+			break;
+	} while (*s++);
+
+	return (num * sign);
 }

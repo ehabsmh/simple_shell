@@ -10,8 +10,8 @@
 */
 int main(int argc, char **argv, char **env)
 {
-	(void) argc, (void)argv, (void) env;
+	(void) argc, (void) env;
 
-	default_process();
+	default_process(argv);
 	return (0);
 }

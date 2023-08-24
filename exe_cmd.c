@@ -1,38 +1,27 @@
 #include "shell.h"
 
 /**
- * exe_cmd - creates child process and executes the cmd
- * @args: the arguments to be executed
+ * exe_cmd - returns function pointer
+ * @args: the command
  *
- * Return: void
+ * Return: fptr
 */
-void exe_cmd(char **args)
+void (*exe_cmd(char **args))(char **args, char **argv, int count)
 {
-	int state;
-	pid_t id;
+	int i;
+
+	builtins **list = builtins_list();
 
 	if (!args)
-		return;
+		return (NULL);
 
-	state = search_path(&args[0]);
-
-	if (state == -1)
+	for (i = 0; list[i]; i++)
 	{
-		perror("./hsh");
-		return;
+		if (_strcmp(args[0], list[i]->cmd) == 0)
+		{
+			return (list[i]->builtin_fp);
+		}
 	}
 
-	id = fork();
-
-	if (id == -1)
-		return;
-
-	if (id == 0)
-	{
-		execve(args[0], args, NULL);
-		perror("./hsh");
-		exit(EXIT_FAILURE);
-	}
-	else
-		wait(NULL);
+	return (path_cmds);
 }
