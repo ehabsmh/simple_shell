@@ -28,6 +28,13 @@ char **parse_cmd(char *cmd)
 	/* Tokenize each string and count the tokens */
 	token = strtok(cmd_cpy, delimiters);
 
+	if (!token)
+	{
+		free(cmd_cpy);
+		cmd_cpy = NULL;
+		return (NULL);
+	}
+
 	while (token)
 	{
 		token_count++;
@@ -56,6 +63,7 @@ char **parse_cmd(char *cmd)
 
 	/* Tokenize and duplicate each string to the new memory */
 	token = strtok(cmd_cpy, delimiters);
+
 	for (i = 0; token; i++)
 	{
 		args[i] = _strdup(token);
