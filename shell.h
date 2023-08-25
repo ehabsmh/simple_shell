@@ -26,7 +26,7 @@ typedef struct Path
 
 /* MAIN PROTOTYPES */
 void default_process(char **argv);
-void display_prompt(void);
+void display_prompt(char *location);
 char *get_cmd(void);
 char **parse_cmd(char *cmd);
 void path_cmds(char **args, char **argv, int count);
@@ -35,16 +35,16 @@ void free_args(char **args);
 /* PATH COMMANDS */
 path *path_list(void);
 void free_path_list(path *head);
-char *_getenv(const char *name);
 char *append_cmd(char *cmd, char *path);
 int search_path(char **arg);
 
 /* BUILTINS */
 
 void exe_cmd(char **args, char **argv, int count);
-
 void __exit(char **args);
 void _env(void);
+void _cd(char **args);
+
 
 
 /* HELPERS PROTOTYPES */

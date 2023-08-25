@@ -15,7 +15,7 @@ void default_process(char **argv)
 
 	do {
 		count++;
-		display_prompt();
+		display_prompt("#cisfun$ ");
 
 		line = get_cmd();
 		if (!line)
@@ -39,6 +39,7 @@ void default_process(char **argv)
 			free_args(args);
 			args = NULL;
 		}
+		
 
 		if (!isatty(STDIN_FILENO))
 		{

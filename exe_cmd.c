@@ -20,6 +20,10 @@ void exe_cmd(char **args, char **argv, int count)
 	{
 		_env();
 	}
+	else if (_strcmp(args[0], "cd") == 0)
+	{
+		_cd(args);
+	}
 	else
 	{
 		path_cmds(args, argv, count);

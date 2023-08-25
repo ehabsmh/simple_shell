@@ -44,3 +44,25 @@ void _env(void)
 		_puts(env[i]);
 	}
 }
+
+void _cd(char **args)
+{
+	char *home = getenv("HOME");
+
+	if (!args[1])
+	{
+		args[1] = _strdup(home);
+		if (chdir(args[1]) != 0)
+		{
+			perror("cd");
+		}
+		free(args[1]);
+		args[1] = NULL;
+		return;
+	}
+
+	if (chdir(args[1]) != 0)
+	{
+		perror("cd");
+	}
+}
