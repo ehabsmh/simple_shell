@@ -3,25 +3,25 @@
 /**
  * exe_cmd - returns function pointer
  * @args: the command
- *
+ * @argv: vector
+ * @count: total number of the program execution
  * Return: fptr
 */
-void (*exe_cmd(char **args))(char **args, char **argv, int count)
+void exe_cmd(char **args, char **argv, int count)
 {
-	int i;
-
-	builtins **list = builtins_list();
-
 	if (!args)
-		return (NULL);
+		return;
 
-	for (i = 0; list[i]; i++)
+	if (_strcmp(args[0], "exit") == 0)
 	{
-		if (_strcmp(args[0], list[i]->cmd) == 0)
-		{
-			return (list[i]->builtin_fp);
-		}
+		__exit(args);
 	}
-
-	return (path_cmds);
+	else if (_strcmp(args[0], "env") == 0)
+	{
+		_env();
+	}
+	else
+	{
+		path_cmds(args, argv, count);
+	}
 }

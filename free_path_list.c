@@ -6,6 +6,8 @@
  */
 void free_path_list(path *head)
 {
+	path *temp;
+
 	path *traverse = head;
 
 	if (!head)
@@ -13,11 +15,16 @@ void free_path_list(path *head)
 
 	while (traverse)
 	{
+		temp = traverse;
 		traverse = traverse->next_dir;
-		free(head->dir);
-		free(head);
-		head = traverse;
+
+		if (temp != NULL)
+		{
+			free(temp->dir);
+			free(temp);
+		}
 	}
 
-	head = NULL;
+	traverse = NULL;
+	temp = NULL;
 }

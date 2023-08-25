@@ -9,8 +9,8 @@
 */
 char *append_cmd(char *cmd, char *path)
 {
-	char *appended_cmd;
-	size_t cmd_len, path_len, appended_cmd_len;
+	char *appended_cmd = NULL;
+	size_t cmd_len = 0, path_len = 0, appended_cmd_len = 0;
 
 	if (!cmd || !path)
 		return (NULL);
@@ -22,7 +22,7 @@ char *append_cmd(char *cmd, char *path)
 	if (!appended_cmd)
 		return (NULL);
 
-	_strcat(appended_cmd, path);
+	_strcpy(appended_cmd, path);
 
 	if (appended_cmd && appended_cmd[path_len - 1] != '/')
 		_strcat(appended_cmd, "/");

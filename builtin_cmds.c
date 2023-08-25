@@ -1,21 +1,17 @@
 #include "shell.h"
 
-#define env environ
-
 /**
  * __exit - exits the shell
  * @args: The command-line
- * @argv: unused
- * @count: unused
  *
  * Return: void
 */
-void __exit(char **args, char **argv, int count)
+void __exit(char **args)
 {
 	int status;
-	(void)argv;
-	(void)count;
 
+	if (!args)
+		return;
 
 	if (args[1])
 	{
@@ -25,25 +21,23 @@ void __exit(char **args, char **argv, int count)
 			exit(status);
 		}
 		status = _atoi(args[1]);
+		free_args(args);
 		exit(status);
 	}
 
+	free_args(args);
 	exit(0);
 }
 
 /**
  * _env - prints the env
- * @args: The command-line
- * @argv: unused
- * @count: unused
  *
  * Return: void
 */
-void _env(char **args __attribute__((unused)), char **argv, int count)
+void _env(void)
 {
 	int i;
-	(void)argv;
-	(void)count;
+	char **env = environ;
 
 	for (i = 0; env[i] != NULL; i++)
 	{

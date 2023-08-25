@@ -2,19 +2,19 @@
 
 /**
  * free_args - freeing the command
- * @line: the command-line
  * @args: the command-line after parsing
  *
  * Return: void
 */
-void free_args(char *line, char **args)
+void free_args(char **args)
 {
 	int i;
 
-	if (!line || !args)
+	if (!args)
 		return;
 
-	free(line);
+	if (args)
+	{
 
 	for (i = 0; args[i] != NULL; i++)
 	{
@@ -22,4 +22,5 @@ void free_args(char *line, char **args)
 	}
 
 	free(args);
+	}
 }

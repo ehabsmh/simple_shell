@@ -8,26 +8,37 @@
 */
 void default_process(char **argv)
 {
-	char *line;
-	char **args;
-	void (*fptr)(char **, char **, int);
+	char *line = NULL;
+	char **args = NULL;
 
 	int count = 0;
 
 	do {
 		count++;
 		display_prompt();
-		/* Extract the command-line */
+
 		line = get_cmd();
-		/* The command-line is parsed to array of pointers */
-		args = parse_cmd(line);
-		free(line);
-		line = NULL;
-		fptr = exe_cmd(args);
-		if (!fptr)
+		if (!line)
 			continue;
 
-		(*fptr)(args, argv, count);
+		args = parse_cmd(line);
+		if (!args)
+		{
+			free(line);
+			continue;
+		}
+
+		line = NULL;
+
+		exe_cmd(args, argv, count);
+		if (!args)
+			continue;
+
+		if (args)
+		{
+			free_args(args);
+			args = NULL;
+		}
 
 		if (!isatty(STDIN_FILENO))
 		{

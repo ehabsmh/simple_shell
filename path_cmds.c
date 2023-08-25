@@ -1,5 +1,7 @@
 #include "shell.h"
 
+void path_cmds(char **args, char **argv, int count);
+
 /**
  * path_cmds - creates child process and executes the cmd
  * @args: the arguments to be executed
@@ -12,10 +14,22 @@ void path_cmds(char **args, char **argv, int count)
 	int is_path;
 	pid_t id;
 
-	path *list = NULL;
-
 	if (!args)
 		return;
+
+	is_path = search_path(&args[0]);
+
+	if (is_path == -1 && args)
+	{
+		fprintf(stderr, "%s: %d: %s: %s\n", argv[0], count, args[0], "not found");
+		return;
+	}
+
+	if (is_path == -1)
+	{
+		fprintf(stderr, "%s: %d: %s: %s\n", argv[0], count, args[0], "not found");
+		return;
+	}
 
 	id = fork();
 
@@ -24,26 +38,23 @@ void path_cmds(char **args, char **argv, int count)
 
 	if (id == 0)
 	{
-		is_path = search_path(&args[0], &list);
-
-		if (is_path == 0 && list)
+		if (is_path == 0 && !args[1])
 		{
-			free_path_list(list);
-		}
+			if (execve(args[0], args, NULL) == -1)
+			{
+				perror(argv[0]);
+				exit(EXIT_FAILURE);
+			}
 
-		if (is_path == -1)
+		}
+		if (execve(args[0], args, NULL) == -1)
 		{
-			fprintf(stderr, "%s: %d: %s\n", argv[0], count, "not found");
-			return;
+			perror(argv[0]);
+			exit(EXIT_FAILURE);
 		}
-
-		execve(args[0], args, NULL);
-		perror(argv[0]);
-		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		wait(NULL);
 	}
-
 }

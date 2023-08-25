@@ -1,6 +1,5 @@
 #include "shell.h"
 
-#define env environ
 
 /**
  * _getenv - returns the env variables by name
@@ -11,9 +10,9 @@
 */
 char *_getenv(const char *name)
 {
-
+	char **env = environ;
 	char *env_value;
-	int i, j, env_len, is_same = 0;
+	int i, j, env_len = 0, is_same = 0;
 
 	for (i = 0; env[i] != NULL; i++)
 	{

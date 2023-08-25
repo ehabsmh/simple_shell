@@ -9,7 +9,7 @@ char *get_cmd(void)
 {
 	char *line = NULL;
 	size_t line_size = 0;
-	ssize_t chars_read;
+	ssize_t chars_read = 0;
 
 	chars_read = getline(&line, &line_size, stdin);
 
@@ -28,7 +28,10 @@ char *get_cmd(void)
 
 	/* if there is no line return null */
 	if (line[0] == '\0')
+	{
+		free(line);
 		return (NULL);
+	}
 
 	return (line);
 }

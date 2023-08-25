@@ -6,9 +6,10 @@
  *
  * Return: the length of the string
  */
-int _strlen(char *s)
+
+size_t _strlen(char *s)
 {
-	unsigned int str_len = 0, i;
+	size_t str_len = 0, i;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
@@ -55,7 +56,8 @@ char *_strcpy(char *dest, char *src)
 char *_strdup(char *str)
 {
 	char *str_cpy;
-	int str_len;
+
+	int str_len = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -80,16 +82,19 @@ char *_strdup(char *str)
  */
 char *_strcat(char *dest, char *src)
 {
-	int index = 0;
-	int dest_len = 0;
+	int i, dest_len;
 
-	while (dest[index++])
-		dest_len++;
-	for (index = 0; src[index]; index++)
-		dest[dest_len++] = src[index];
+	dest_len = _strlen(dest);
+
+	for (i = 0; src[i] != '\0'; i++)
+	{
+		dest[dest_len + i] = src[i];
+	}
+
+	dest[dest_len + i] = '\0';
+
 	return (dest);
 }
-
 /**
  * _atoi - convert a string to an integer.
  * @s: the string to be comverted.
